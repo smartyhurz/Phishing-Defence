@@ -1,0 +1,107 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block stylesheet %}
+<!-- Additional custom styles can go here in child templates -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/swiper-bundle.min.css' %}" />
+
+{% endblock stylesheet %}
+
+{% block content %}
+<h1>Create Campaign</h1>
+<!--form method="post">
+    {% csrf_token %}
+    <label for="name">Campaign Name:</label>
+    <input type="text" id="name" name="name" required><br>
+    <label for="url">URL:</label>
+    <input type="text" id="url" name="url" required><br>
+    <label for="smtp_id">SMTP ID:</label>
+    
+    <label for="template_id">Email Template:</label>
+    <select id="template_id" name="template_id" required>
+        <option value="">Select Template</option>
+        <!-- Dynamically populate templates --
+        {% for template in email_templates %}
+        <option value="{{ template.id }}">{{ template.name }}</option>
+        {% endfor %}
+    </select><br>
+
+    <label for="landing_page">Landing Page:</label>
+    <select id="landing_page" name="landing_page" required>
+        <option value="">Select Landing Page</option>
+        <!-- Dynamically populate landing pages --
+        {% for page in landing_pages %}
+        <option value="{{ page.id }}">{{ page.name }}</option>
+        {% endfor %}
+    </select><br>
+
+
+    <input type="number" id="template_id" name="template_id" required><br>
+    <label for="group_id">Group ID:</label>
+    <input type="number" id="group_id" name="group_id" required><br>
+    <label for="launch_date">Launch Date:</label>
+    <input type="text" id="launch_date" name="launch_date" class="flatpickr" placeholder="YYYY-MM-DD HH:mm" required><br>
+
+    <label for="send_by_date">Send By Date (Optional):</label>
+    <input type="text" id="send_by_date" name="send_by_date" class="flatpickr" placeholder="YYYY-MM-DD HH:mm"><br>
+    <button type="submit">Create Campaign</button>
+</form-->
+
+
+
+<form method="post">
+    {% csrf_token %}
+
+    <label for="name">Campaign Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="template_id">Email Template:</label>
+    <select id="template_id" name="template_id">
+        {% for template in email_templates %}
+            <option value="{{ template.id }}">{{ template.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="url">Landing Page URL:</label>
+    <input type="url" id="url" name="url" placeholder="Enter landing page URL" ><br><br>
+
+    <label for="launch_date">Launch Date:</label>
+    <input type="datetime-local" id="launch_date" name="launch_date" required><br><br>
+
+    <label for="send_by_date">Send Emails By (Optional):</label>
+    <input type="datetime-local" id="send_by_date" name="send_by_date"><br><br>
+
+    <label for="smtp_id">Sending Profile:</label>
+    <select id="smtp_id" name="smtp_id">
+        {% for smtp in smtp_profiles %}
+            <option value="{{ smtp.id }}">{{ smtp.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="group_ids">Groups:</label>
+    <select id="group_ids" name="group_ids">
+        {% for group in groups %}
+            <option value="{{ group.id }}">{{ group.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Create Campaign</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+{% endblock %}
+
+<script src="{% static 'assets/js/form-wizard/form-wizard.js' %}"></script>
+<!-- flatpicker-->
+<script src="{% static 'assets/js/flat-pickr/flatpickr.js' %}"></script>

@@ -1,0 +1,92 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block stylesheet %}
+<!-- Additional custom styles can go here in child templates -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/datatables.css' %}">
+{% endblock stylesheet %}
+{% block content %}
+
+
+
+<form method="POST" action="{% url 'group_list' %}">
+    {% csrf_token %}
+    <label for="group_name">Group Name:</label>
+    <input type="text" name="group_name" required>
+
+    <div id="user-fields">
+        <div class="user-entry">
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="position" placeholder="Position" required>
+        </div>
+    </div>
+
+    <button type="button" id="add-user">Add User</button>
+    <button type="submit">Save Changes</button>
+</form>
+
+
+
+{% endblock %}
+
+
+<!-- Additional custom scripts can go here in child templates --
+<!-- datatable--
+<script src="{% static 'assets/js/datatable/datatables/jquery.dataTables.min.js' %}"></script>
+<!-- page_datatable--
+<script src="{% static 'assets/js/js-datatables/datatables/datatable.custom.js' %}"></script>
+<!-- page_datatable--
+<script src="{% static 'assets/js/datatable/datatables/datatable.custom.js' %}"></script>-->
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+    
+        var csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+        // Log the form data
+        console.log('Form data:', {
+            group_name: document.querySelector('[name=group_name]').value,
+            first_name: document.querySelector('[name=first_name]').value,
+            last_name: document.querySelector('[name=last_name]').value,
+            email: document.querySelector('[name=email]').value,
+            position: document.querySelector('[name=position]').value
+        });
+    
+        fetch('{% url "group_list" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf_token
+            },
+            body: JSON.stringify({
+                group_name: document.querySelector('[name=group_name]').value,
+                first_name: document.querySelector('[name=first_name]').value,
+                last_name: document.querySelector('[name=last_name]').value,
+                email: document.querySelector('[name=email]').value,
+                position: document.querySelector('[name=position]').value
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>    
+<script>
+    document.getElementById('add-user').addEventListener('click', function() {
+        const userFields = document.getElementById('user-fields');
+        const newUserEntry = document.querySelector('.user-entry').cloneNode(true);
+        // Clear the values of cloned fields
+        newUserEntry.querySelectorAll('input').forEach(input => input.value = '');
+        userFields.appendChild(newUserEntry);
+    });
+</script>    

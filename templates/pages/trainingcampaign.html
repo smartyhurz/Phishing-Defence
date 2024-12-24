@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag-n-Drop Email Editor Component</title>
+</head>
+<body>
+    <!-- Use the custom email-editor component -->
+    <email-editor></email-editor>
+<script>
+    class EmailEditor extends HTMLElement {
+    constructor() {
+        super();
+        // Attach Shadow DOM to isolate styles
+        const shadow = this.attachShadow({ mode: 'open' });
+
+        // Create the structure of the email editor
+        const editorWrapper = document.createElement('div');
+        editorWrapper.classList.add('editor-wrapper');
+
+        editorWrapper.innerHTML = `
+            <style>
+                /* Styles inside the component */
+                .editor-wrapper {
+                    display: flex;
+                    width: 100%;
+                    max-width: 1200px;
+                    border: 1px solid #ddd;
+                    background-color: #fff;
+                }
+
+                .toolbar {
+                    width: 200px;
+                    background-color: #333;
+                    color: #fff;
+                    padding: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .toolbar-item {
+                    background-color: #444;
+                    color: white;
+                    padding: 10px;
+                    margin: 10px 0;
+                    cursor: pointer;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .drop-area {
+                    flex: 1;
+                    padding: 20px;
+                    border-left: 1px solid #ddd;
+                    min-height: 600px;
+                    background-color: #f9f9f9;
+                    outline: none;
+                    overflow: auto;
+                }
+
+                .drop-area:focus {
+                    border: 2px solid #007bff;
+                }
+            </style>
+
+            <div class="toolbar">
+                <div class="toolbar-item" draggable="true" data-type="heading">Heading</div>
+                <div class="toolbar-item" draggable="true" data-type="text">Text</div>
+                <div class="toolbar-item" draggable="true" data-type="button">Button</div>
+                <div class="toolbar-item" draggable="true" data-type="divider">Divider</div>
+                <div class="toolbar-item" draggable="true" data-type="image">Image</div>
+            </div>
+
+            <div class="drop-area" contenteditable="true">
+                Drop elements here to build your email...
+            </div>
+        `;
+
+        // Append the wrapper to the shadow DOM
+        shadow.appendChild(editorWrapper);
+
+        // Add drag-n-drop functionality
+        this.addDragAndDropFunctionality(editorWrapper);
+    }
+
+    // Function to handle the drag-n-drop behavior
+    addDragAndDropFunctionality(wrapper) {
+        const toolbarItems = wrapper.querySelectorAll('.toolbar-item');
+        const dropArea = wrapper.querySelector('.drop-area');
+
+        // Handle drag start
+        toolbarItems.forEach(item => {
+            item.addEventListener('dragstart', function (e) {
+                e.dataTransfer.setData('text/plain', e.target.dataset.type);
+            });
+        });
+
+        // Prevent default behavior on drag over
+        dropArea.addEventListener('dragover', function (e) {
+            e.preventDefault();
+        });
+
+        // Handle drop
+        dropArea.addEventListener('drop', function (e) {
+            e.preventDefault();
+            const componentType = e.dataTransfer.getData('text/plain');
+            let element;
+
+            if (componentType === 'heading') {
+                element = document.createElement('h1');
+                element.contentEditable = 'true';
+                element.textContent = 'Edit heading...';
+            } else if (componentType === 'text') {
+                element = document.createElement('p');
+                element.contentEditable = 'true';
+                element.textContent = 'Edit text...';
+            } else if (componentType === 'button') {
+                element = document.createElement('button');
+                element.textContent = 'Click me';
+                element.style.padding = '10px 20px';
+                element.style.backgroundColor = '#007bff';
+                element.style.color = 'white';
+                element.style.border = 'none';
+            } else if (componentType === 'divider') {
+                element = document.createElement('hr');
+            } else if (componentType === 'image') {
+                element = document.createElement('img');
+                element.src = 'https://via.placeholder.com/300x100';
+                element.alt = 'Placeholder Image';
+                element.style.width = '100%';
+            }
+
+            if (element) {
+                dropArea.appendChild(element);
+            }
+        });
+    }
+}
+
+// Define the custom element
+customElements.define('email-editor', EmailEditor);
+
+</script>
+</body>
+</html>

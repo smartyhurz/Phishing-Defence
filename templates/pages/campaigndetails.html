@@ -1,0 +1,404 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block stylesheet %}
+<!-- Additional custom styles can go here in child templates -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/datatables.css' %}">
+{% endblock stylesheet %}
+{% block content %}
+<!-- breadcrumb -->
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6 col-12">
+                <h2>Campaign Details And Report</h2>
+                <p class="mb-0 text-title-gray">Welcome back! Let’s start from where you left.</p>
+            </div>
+            <div class="col-sm-6 col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}"><i
+                                class="iconly-Home icli svg-color"></i></a></li>
+                    <li class="breadcrumb-item">Dashboard</li>
+                    <li class="breadcrumb-item"><a href="{% url 'emailcampaign' %}">Email Campaigns</a></li>
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main container -->
+<div class="container-fluid general-widget mb-3">
+    <div class="row g-sm-3 height-equal-2 widget-charts ">
+        <div class="col-sm-3">
+            <div class="card small-widget mb-sm-0">
+                <div class="card-body primary"><span class="f-light">Clickers</span>
+                    <div class="d-flex align-items-end gap-1">
+                        <h4>55</h4><span class="font-primary f-12 f-w-500"><i
+                                class="icon-arrow-up"></i><span>+50%</span></span>
+                    </div>
+                    <div class="bg-gradient">
+                        <svg class="stroke-icon svg-fill">
+                            <use href="/static/assets/svg/icon-sprite.svg#Capa_1"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card small-widget mb-sm-0">
+                <div class="card-body warning"><span class="f-light">Division</span>
+                    <div class="d-flex align-items-end gap-1">
+                        <h4>55</h4><span class="font-warning f-12 f-w-500"><i
+                                class="icon-arrow-up"></i><span>+20%</span></span>
+                    </div>
+                    <div class="bg-gradient">
+                        <svg class="stroke-icon svg-fill">
+                            <use href="/static/assets/svg/icon-sprite.svg#Capa_Live"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card small-widget mb-sm-0">
+                <div class="card-body secondary"><span class="f-light">Failures </span>
+                    <div class="d-flex align-items-end gap-1">
+                        <h4>10</h4><span class="font-secondary f-12 f-w-500"><i
+                                class="icon-arrow-down"></i><span>-10%</span></span>
+                    </div>
+                    <div class="bg-gradient">
+                        <svg class="stroke-icon svg-fill">
+                            <use href="/static/assets/svg/icon-sprite.svg#Employee"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card small-widget mb-sm-0">
+                <div class="card-body success"><span class="f-light">Phish %</span>
+                    <div class="d-flex align-items-end gap-1">
+                        <h4>45</h4><span class="font-success order-chartf-12 f-w-500"><i
+                                class="icon-arrow-down"></i><span>-80%</span></span>
+                    </div>
+                    <div class="bg-gradient">
+                        <svg class="stroke-icon svg-fill">
+                            <use href="/static/assets/svg/icon-sprite.svg#phishing"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- Main container End -->
+<div class="container-fluid">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header card-no-border pb-0">
+                    <div class="header-top">
+                        <h3>Marketing Simulation</h3>
+
+                    </div>
+                    <p>Campaign ran from june 5, 2024 10:00 AM to june 8, 2024 6:00 PM
+                    </p>
+                </div>
+                <div class="card-body">
+                    <canvas id="emailPerformanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header card-no-border pb-0">
+                    <div class="header-top">
+                        <h3>Comparison</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="dateTimeBarChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>Campaign Users</h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex justify-content-end bd-highlight mb-3">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-original-title="btn btn-primary">
+                                    <i class="fa-solid fa-database me-2"></i> Export
+                                </button>
+                              </div>
+                        </div>
+                    </div>
+                   
+                   
+                </div>
+                <div class="card-body">
+                   
+                    <div class="table-responsive">
+                        <table class="display" id="basic-1">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Sent Time</th>
+                                    <th>Opened Time</th>
+                                    <th>Clicked Time</th>
+                                    <th>Location</th>
+                                    <th>IP Address</th>
+                                    <th>Device</th>
+                                    <th>Clicks </th>
+                                    <th>Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nandha Kumar</td>
+                                    <td>nandha@mailinator.com</td>
+                                    <td>5-Sep-24 5:50 PM</td>
+                                    <td>5-Sep-24 5:51 PM</td>
+                                    <td>5-Sep-24 5:52 PM</td>
+                                    <td>14.99.121.54</td>
+                                    <td>Londa</td>
+                                    <td>Chrome Microsoft Windows</td>
+                                    <td>2</td>
+                                    <td>
+                                        <div class="btn bg-light-success border-light-success text-success">Delivered
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nandha Kumar</td>
+                                    <td>nandha@mailinator.com</td>
+                                    <td>5-Sep-24 5:50 PM</td>
+                                    <td>5-Sep-24 5:51 PM</td>
+                                    <td>5-Sep-24 5:52 PM</td>
+                                    <td>14.99.121.54</td>
+                                    <td>Londa</td>
+                                    <td>Chrome Microsoft Windows</td>
+                                    <td>2</td>
+                                    <td>
+                                        <div class="btn bg-light-success border-light-success text-success">Delivered
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+
+<!-- general-->
+<script src="{% static 'assets/js/pages/general.js' %}"></script>
+<!-- datatable-->
+<script src="{% static 'assets/js/datatable/datatables/jquery.dataTables.min.js' %}"></script>
+<!-- page_datatable-->
+<script src="{% static 'assets/js/js-datatables/datatables/datatable.custom.js' %}"></script>
+<!-- page_datatable-->
+<script src="{% static 'assets/js/datatable/datatables/datatable.custom.js' %}"></script>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // First chart: Email Performance Chart
+    const ctx1 = document.getElementById('emailPerformanceChart').getContext('2d');
+    ctx1.canvas.height = 250; // Set the height in pixels
+    const data1 = {
+        labels: ['Emails Sent', 'Delivered', 'Opened', 'Not Opened', 'Total Links Clicked', 'Link Clicked (Once)', 'Multiple Clicks'],
+        datasets: [{
+            label: 'Performance',
+            data: [120, 150, 180, 200, 220, 250, 270],
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgba(255, 205, 86, 0.5)',
+                'rgba(201, 203, 207, 0.5)',
+                'rgba(255, 99, 132, 0.5)'
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 205, 86, 1)',
+                'rgba(201, 203, 207, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1,
+        }]
+    };
+
+    const config1 = {
+        type: 'bar',
+        data: data1,
+        options: {
+            responsive: true,
+            indexAxis: 'y', // Horizontal bar chart
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 0,
+                        minRotation: 0,
+                    }
+                },
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    };
+
+    const emailPerformanceChart = new Chart(ctx1, config1);
+</script>
+
+<script>
+    const ctx = document.getElementById('dateTimeBarChart').getContext('2d');
+    ctx.canvas.height = 270;
+    const data = {
+        labels: [
+            'Sep 24,24 3:03 PM',
+            'Sep 23, 24 10:41 AM',
+            'Sep 22, 24 10:37 AM',
+            'Sep 21, 24 10:37 AM',
+
+
+        ], // Labels for date-times
+        datasets: [
+            {
+                label: 'Phishing Link Clicked',
+                data: [2, 8, 10, 1, 2, 3, 4, 5], // Example data
+                backgroundColor: 'rgba(255, 99, 132, 0.7)',  // Red color
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Email Not Opened',
+                data: [3, 7, 16, 2, 4, 1, 2, 6], // Example data
+                backgroundColor: 'rgba(75, 192, 192, 0.7)',  // Green color
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }
+        ]
+    };
+
+    const options = {
+        responsive: true,
+        scales: {
+            x: {
+                beginAtZero: true,
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 0,   // Rotate labels for better readability
+                    minRotation: 0    // Slanting labels for date-time
+                },
+                grid: {
+                    display: true     // Clean up grid lines for aesthetics
+                },
+                barPercentage: 0.6,    // Adjust bar width
+                categoryPercentage: 0.7 // Adjust space between bar groups
+            },
+            y: {
+                beginAtZero: true // Ensure y-axis starts from zero
+            }
+        },
+        plugins: {
+            legend: {
+                display: false, // Show legend
+                position: 'bottom' // Position legend at the bottom
+            }
+        }
+    };
+
+    // Create the chart
+    const dateTimeBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+</script>
+
+
+<script>
+    // Second chart: Dual Bar Chart
+    const ctx2 = document.getElementById('dualBarChart').getContext('2d');
+    ctx2.canvas.height = 250;
+    const data2 = {
+        labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5', 'Category 6'],
+        datasets: [
+            {
+                label: 'Red Dataset',
+                data: [2, 8, 10, 1, 2, 3],
+                backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Green Dataset',
+                data: [3, 7, 16, 2, 4, 1],
+                backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }
+        ]
+    };
+
+    const options2 = {
+        responsive: true,
+        scales: {
+            x: {
+                beginAtZero: true,
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 0,
+                    minRotation: 0
+                },
+                grid: {
+                    display: false
+                },
+                barPercentage: 0.6,
+                categoryPercentage: 0.7
+            },
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+
+    const dualBarChart = new Chart(ctx2, {
+        type: 'bar',
+        data: data2,
+        options: options2
+    });
+</script>
+
+{% endblock %}

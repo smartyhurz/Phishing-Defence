@@ -1,0 +1,147 @@
+{% load static %}
+<div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+  <div class="main-sidebar" id="main-sidebar">
+    <ul class="sidebar-menu" id="simple-bar">
+      <li class="pin-title sidebar-main-title">
+        <div>
+          <h5 class="sidebar-title f-w-700">Pinned</h5>
+        </div>
+      </li>
+
+      <li class="sidebar-list">
+        <a class="sidebar-link" href="{% url 'index' %}">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Home-dashboard"></use>
+          </svg>
+          <h6>Dashboards</h6>
+        </a>
+
+      </li>
+
+
+      <li class="sidebar-main-title">
+        <div>
+          <h5 class="f-w-700 sidebar-title pt-3">Manage</h5>
+        </div>
+      </li>
+      <li class="sidebar-list">
+        <a class="sidebar-link" href="{% url 'createteam' %}">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#AddUser"></use>
+          </svg>
+          <h6 class="f-w-600">Create Group</h6>
+        </a>
+
+      </li>
+      <li class="sidebar-list"><a class="sidebar-link" href="{% url 'manageteam' %}">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Team"></use>
+          </svg>
+          <h6 class="f-w-600">Manage Team </h6>
+        </a></li>
+
+
+      <li class="sidebar-main-title">
+        <div>
+          <h5 class="f-w-700 sidebar-title pt-3">Create Campaigns</h5>
+        </div>
+      </li>
+      <li class="sidebar-list"> 
+       
+        <a class="sidebar-link" href="{% url 'emailcampaign' %}">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Message"></use>
+          </svg>
+          <h6 class="f-w-600">Email</h6>
+        </a></li>
+      <li class="sidebar-list">
+        <a class="sidebar-link" href="{% url 'smscampaign' %}">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Document"></use>
+          </svg>
+          <h6 class="f-w-600">SMS</h6>
+        </a>
+      
+      </li>
+      <li class="sidebar-list">
+        <a class="sidebar-link" href="#">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Whatsapp"></use>
+          </svg>
+          <h6 class="f-w-600">WhatsApp</h6>
+        </a>
+      </li>
+      <li class="sidebar-list"> 
+        <a class="sidebar-link" href="#">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Category"></use>
+          </svg>
+          <h6 class="f-w-600">Training</h6>
+        </a>
+      </li>
+
+     
+      <li class="sidebar-main-title">
+        <div>
+          <h5 class="sidebar-title pt-3 f-w-700">Material</h5>
+        </div>
+      </li>
+      <li class="sidebar-list"> 
+      
+        <a class="sidebar-link" href="{% url 'phishingmaterial' %}">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Filter"></use>
+          </svg>
+          <h6 class="f-w-600">Phishing Material</h6>
+        </a>
+        
+      </li>
+      <li class="sidebar-list"> 
+       
+        <a class="sidebar-link" href="#">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Edit-line"></use>
+          </svg>
+          <h6 class="f-w-600">Posters</h6>
+        </a>
+      </li>
+      <li class="sidebar-main-title">
+        <div>
+          <h5 class="sidebar-title pt-3 f-w-700">Reporter</h5>
+        </div>
+      </li>
+      <li class="sidebar-list"> 
+        <a class="sidebar-link" href="#">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Wallet"></use>
+          </svg>
+          <h6 class="f-w-600">Reporter Campaign</h6>
+        </a></li>
+      
+      <li class="sidebar-main-title">
+        <div>
+          <h5 class="sidebar-title pt-3 f-w-700">Setting</h5>
+        </div>
+      </li>
+      <li class="sidebar-list"> 
+        
+        <a class="sidebar-link" href="#">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Gallery"></use>
+          </svg>
+          <h6 class="f-w-600">Templates </h6>
+        </a>
+       
+      </li>
+      <li class="sidebar-list"> 
+        
+        <a class="sidebar-link" href="#">
+          <svg class="stroke-icon">
+            <use href="/static/assets/svg/iconly-sprite.svg#Game"></use>
+          </svg>
+          <h6 class="f-w-600">Instruction Manual </h6>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

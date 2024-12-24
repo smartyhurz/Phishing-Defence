@@ -1,0 +1,226 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block stylesheet %}
+<!-- Additional custom styles can go here in child templates -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/swiper-bundle.min.css' %}" />
+
+{% endblock stylesheet %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6 col-12">
+                <h2>Ecommerce dashboard</h2>
+                <p class="mb-0 text-title-gray">"Welcome back! Continue your journey."</p>
+            </div>
+            <div class="col-sm-6 col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="iconly-Home icli svg-color"></i></a></li>
+                    <li class="breadcrumb-item">Dashboard</li>
+                    <li class="breadcrumb-item active">Ecommerce</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid general-widget">
+    <div class="row g-sm-3 height-equal-2 widget-charts ">
+      <div class="col-sm-3">
+        <div class="card small-widget mb-sm-0">
+          <div class="card-body primary"><span class="f-light">Live Campaigns</span>
+            <div class="d-flex align-items-end gap-1">
+              <h4>55</h4><span class="font-primary f-12 f-w-500"><i
+                  class="icon-arrow-up"></i><span>+50%</span></span>
+            </div>
+            <div class="bg-gradient">
+              <svg class="stroke-icon svg-fill">
+                <use href="/static/assets/svg/icon-sprite.svg#Capa_1"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card small-widget mb-sm-0">
+          <div class="card-body warning"><span class="f-light">Scheduled Campaigns</span>
+            <div class="d-flex align-items-end gap-1">
+              <h4>2,908</h4><span class="font-warning f-12 f-w-500"><i
+                  class="icon-arrow-up"></i><span>+20%</span></span>
+            </div>
+            <div class="bg-gradient">
+              <svg class="stroke-icon svg-fill">
+                <use href="/static/assets/svg/icon-sprite.svg#Capa_Live"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card small-widget mb-sm-0">
+          <div class="card-body secondary"><span class="f-light">Users</span>
+            <div class="d-flex align-items-end gap-1">
+              <h4>$389k</h4><span class="font-secondary f-12 f-w-500"><i
+                  class="icon-arrow-down"></i><span>-10%</span></span>
+            </div>
+            <div class="bg-gradient">
+              <svg class="stroke-icon svg-fill">
+                <use href="/static/assets/svg/icon-sprite.svg#Employee"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card small-widget mb-sm-0">
+          <div class="card-body success"><span class="f-light">Close</span>
+            <div class="d-flex align-items-end gap-1">
+              <h4>$3,908</h4><span class="font-success order-chartf-12 f-w-500"><i
+                  class="icon-arrow-up"></i><span>+80%</span></span>
+            </div>
+            <div class="bg-gradient">
+              <svg class="stroke-icon svg-fill">
+                <use href="/static/assets/svg/icon-sprite.svg#profit"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="container-fluid my-5 dashboard-3">
+    <div class="row">
+      <div class="col-xxl-4 col-xl-4 col-md-6">
+        <div class="card graphic-design overflow-hidden">
+          <div class="pie-card">
+            <div class="card-header">
+              <div class="header-top">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="flex-shrink-0">
+                    <div class="icon"><img class="img-fluid" src="/static/assets/images/icon/email.png"
+                        alt="chair" /></div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h5>Email Campaigns</h5>
+                    <p class="mb-0">Campaign Overview</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body revenue-category">
+              <div class="pie-chart" id="pie-chart"></div>
+              <div class="donut-legend text-center" id="legend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xxl-4 col-xl-4 col-md-6">
+        <div class="card graphic-design overflow-hidden">
+          <div class="pie-card">
+            <div class="card-header">
+              <div class="header-top">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="flex-shrink-0">
+                    <div class="icon"><img class="img-fluid" src="/static/assets/images/icon/emailemailemail.png"
+                        alt="chair" /></div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h5>SMS Campaigns</h5>
+                    <p class="mb-0">Campaign Overview</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body revenue-category">
+              <div class="" id="circlechart"></div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xxl-4 col-xl-4 col-md-6">
+        <div class="card graphic-design overflow-hidden">
+          <div class="pie-card">
+            <div class="card-header">
+              <div class="header-top">
+                <div class="d-flex align-items-center gap-2">
+                  <div class="flex-shrink-0">
+                    <div class="icon"><img class="img-fluid" src="/static/assets/images/icon/whatsapp.png"
+                        alt="chair" /></div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h5>whatsapp Campaigns</h5>
+                    <p class="mb-0">Campaign Overview</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body revenue-category">
+              <div class="" id="pieCharts"></div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- Additional custom scripts can go here in child templates -->
+<!-- config -->
+<script src="{% static 'assets/js/config.js' %}"></script>
+<!-- apex -->
+<script src="{% static 'assets/js/chart/apex-chart/apex-chart.js' %}"></script>
+<script src="{% static 'assets/js/chart/apex-chart/stock-prices.js' %}"></script>
+
+<!-- slick -->
+<script src="{% static 'assets/js/slick/slick.min.js' %}"></script>
+<script src="{% static 'assets/js/slick/slick.js' %}"></script>
+<!-- chart_widget-->
+<script src="../assets/js/pages/chart.js"></script>
+<!-- Page js-->
+<script src="{% static 'assets/js/pages/page2-js.js' %}"></script>
+<script src="{% static 'assets/js/pages/page3-js.js' %}"></script>
+
+<!-- morrischart-->
+<script src="{% static 'assets/js/chart/morris-chart/raphael.js' %}"></script>
+<script src="{% static 'assets/js/chart/morris-chart/morris.js' %}"> </script>
+
+<!-- general-->
+<script src="{% static 'assets/js/chart/apex-chart/chart-custom.js' %}"></script>
+<script src="{% static 'assets/js/pages/general.js' %}"></script>
+<script>
+  var options = {
+    series: [30, 20, 05, 05],
+    chart: {
+      height: 480,
+      type: 'pie',
+    },
+    labels: ["Delivered", "Opened", "Clicked", "Not Opened"],
+    legend: {
+        position: 'bottom',
+       
+    },
+    colors: [AdmiroAdminConfig.primary,AdmiroAdminConfig.secondary,"#3eb95f","#ea9200","#e74b2b",],
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+          width: 200
+        },
+      }
+    }]
+  };
+  var chart = new ApexCharts(document.querySelector("#pieCharts"), options);
+  chart.render();
+
+</script>
+{% endblock %}
